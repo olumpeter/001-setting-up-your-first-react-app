@@ -100,4 +100,17 @@ Before we move on, you might want to change your `package.json` file a little bi
 
 ## Deploying to github
 
-### Reference: [Deploy Vite React App on GitHub in 5 Steps(Link to a Youtube Video)](https://www.youtube.com/watch?v=oPuaMcLRYdY)
+>**Reference:** [Deploy Vite React App on GitHub in 5 Steps(Link to a Youtube Video)](https://www.youtube.com/watch?v=oPuaMcLRYdY)
+
+## How you can access this live website
+
+<dl>
+  Use the following URL:
+  <dd>
+    https://olumpeter.github.io/001-setting-up-your-first-react-app/
+  </dd>
+  or click the following link:
+  <dd>
+    <a href="https://olumpeter.github.io/001-setting-up-your-first-react-app/">Visit website</a>
+  </dd>
+</dl>
