@@ -97,6 +97,150 @@ Before we move on, you might want to change your `package.json` file a little bi
 
 >**Note**: You don't need the extra `--` here because we're passing arguments directly to vite, rather than to a pre-defined npm script.
 
+# Exploring our first React component — `<App />`
+
+In React, a **component** is a reusable module that renders a part of our overall application. Components can be big or small, but they are usually clearly defined: they serve a single, obvious purpose.
+
+Let's open `src/App.jsx`, since our browser is prompting us to edit it. This file contains our first component, `<App />`:
+
+```JSX
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <div>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
+  );
+}
+
+export default App;
+```
+
+The `App.jsx` file consists of three main parts: some `import` statements at the top, the `App()` function in the middle, and an `export` statement at the bottom. Most React components follow this pattern.
+
+## Import statements
+
+The import statements at the top of the file allow `App.jsx` to use code that has been defined elsewhere. Let's look at these statements more closely.
+
+```JSX
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+```
+
+The first statement imports the `useState` hook from the react library. Hooks are a way of using React's features inside a component.
+
+After that, we import `reactLogo` and `viteLogo`. Note that their import paths start with `./` and `/` respectively and that they end with the `.svg` extension at the end. This tells us that these imports are local, referencing our own files rather than npm packages.
+
+The final statement imports the CSS related to our `<App />` component. Note that there is no variable name and no `from` directive. This is called a [side-effect import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#import_a_module_for_its_side_effects_only) — it doesn't import any value into the JavaScript file, but it tells Vite to add the referenced CSS file to the final code output, so that it can be used in the browser.
+
+## The `App()` function
+
+After the imports, we have a function named `App()`, which defines the structure of the App component. Whereas most of the JavaScript community prefers lower camel case names like helloWorld, React components use Pascal case (or upper camel case) variable names, like HelloWorld, to make it clear that a given JSX element is a React component and not a regular HTML tag. If you were to rename the `App()` function to `app()`, your browser would throw an error.
+
+Let's look at `App()` more closely.
+
+```JSX
+function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <div>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
+  );
+}
+```
+The `App()` function returns a JSX expression. This expression defines what your browser ultimately renders to the DOM. 
+
+Just under the return keyword is a special bit of syntax: `<>`. This is a `fragment`. React components have to return a single JSX element, and fragments allow us to do that without rendering arbitrary `<div>`s in the browser. You'll see fragments in many React applications.
+
+## The `export` statement
+
+There's one more line of code after the App() function:
+
+```JSX
+export default App;
+```
+
+This export statement makes our `App()` function available to other modules. We'll talk more about this later.
+
+## Moving on to main
+
+Let's open src/main.jsx, because that's where the <App /> component is being used. This file is the entry point for our app, and it initially looks like this:
+
+```JSX
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+);
+```
+
+As with `App.jsx`, the file starts by importing all the JS modules and other assets it needs to run.
+
+The first two statements import the `React` and `ReactDOM` libraries because they are referenced later in the file. We don't write a path or extension when importing these libraries because they are not local files. In fact, they are listed as dependencies in our `package.json` file. Be careful of this distinction as you work through this lesson!
+
+We then import our `App()` function and `index.css`, which holds global styles that are applied to our whole app.
+
+We then call the `ReactDOM.createRoot()` function, which defines the root node of our application. This takes as an argument the DOM element inside which we want our React app to be rendered. In this case, that's the DOM element with an ID of root. Finally, we chain the `render()` method onto the `createRoot()` call, passing it the JSX expression that we want to render inside our root. By writing `<App />` as this JSX expression, we're telling React to call the `App()` function which renders the App component inside the root node.
+
+>**Note**: `<App />` is rendered inside a special `<React.StrictMode>` component. This component helps developers catch potential problems in their code.
+
+You can read up on these React APIs, if you'd like:
+
+- ReactDOM.createRoot()
+- React.StrictMode
 
 ## Deploying to github
 
