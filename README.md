@@ -302,7 +302,9 @@ git push -u origin main
 npm run deploy
 ```
 
-### Reference: [Deploy Vite React App on GitHub in 5 Steps(Link to a Youtube Video)](https://www.youtube.com/watch?v=oPuaMcLRYdY)
+### Reference: 
+1. [Deploy Vite React App on GitHub in 5 Steps(Link to a Youtube Video)](https://www.youtube.com/watch?v=oPuaMcLRYdY)
+2. https://medium.com/@aishwaryaparab1/deploying-vite-deploying-vite-app-to-github-pages-166fff40ffd3
 
 ## How you can access this live website
 
